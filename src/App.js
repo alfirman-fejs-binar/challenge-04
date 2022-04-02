@@ -1,11 +1,17 @@
+import { Routes, Route } from "react-router-dom";
+import CarDetail from "./components/CarDetail";
+import Cars from "./components/Cars";
+import Layout from "./components/Layout";
 import "./App.css";
-import Home from "./pages/Home";
 
 function App() {
   return (
-    <>
-      <Home />
-    </>
+    <Layout>
+      <Routes>
+        <Route exact path="/" element={<Cars />} />
+        <Route path="/:id" element={<CarDetail />} />
+      </Routes>
+    </Layout>
   );
 }
 

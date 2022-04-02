@@ -1,5 +1,3 @@
-import Search from "../Search";
-
 export default function Hero() {
   return (
     <section id="hero">
@@ -27,9 +25,6 @@ export default function Hero() {
             />
           </div>
         </div>
-      </div>
-      <div>
-        <Search />
       </div>
     </section>
   );

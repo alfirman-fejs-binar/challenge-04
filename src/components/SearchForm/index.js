@@ -1,6 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCars } from "../Layout";
 
-export default function Search() {
+export default function SearchForm() {
+  const push = useNavigate();
+  const { setCars } = useCars();
+
   const [form, setForm] = useState({
     type: "",
     date: "",
@@ -10,9 +15,24 @@ export default function Search() {
 
   const setValue = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const submit = (e) => {
+  const getCars = () => {
+    return new Promise((resolve, reject) => {
+      fetch("https://rent-cars-api.herokuapp.com/customer/car")
+        .then((response) => response.json())
+        .then((result) => resolve(result))
+        .catch((error) => reject(error));
+    });
+  };
+
+  const submit = async (e) => {
     e.preventDefault();
-    console.log(form);
+    try {
+      push("/");
+      const cars = await getCars();
+      setCars(cars);
+    } catch (error) {
+      console.log("something went wrong");
+    }
   };
 
   return (
